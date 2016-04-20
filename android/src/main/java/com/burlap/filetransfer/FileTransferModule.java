@@ -29,7 +29,7 @@ public class FileTransferModule extends ReactContextBaseJavaModule {
 
     private String TAG = "ImageUploadAndroid";
     private ReactApplicationContext reactContext;
-    private static int dataCounter = 0;
+    private int dataCounter = 0;
     private final int dataFilterSize = 50;
 
     public FileTransferModule(ReactApplicationContext reactContext) {
@@ -154,7 +154,7 @@ public class FileTransferModule extends ReactContextBaseJavaModule {
             public void onRequestProgress(long bytesWritten, long contentLength) {
                 if (contentLength <= 0) {
                     sendProgressJSEvent(0.9);
-                } else if (dataCounter%dataFilterSize == 0) {
+                } else if (dataCounter % dataFilterSize == 0) {
                     Log.d(TAG, bytesWritten + "/" + contentLength);
                     sendProgressJSEvent((double) bytesWritten / contentLength);
                 }

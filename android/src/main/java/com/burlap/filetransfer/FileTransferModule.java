@@ -45,6 +45,8 @@ public class FileTransferModule extends ReactContextBaseJavaModule {
 
     @ReactMethod
     public void upload(final ReadableMap options, final Callback completeCallback) {
+        // reset dataCounter
+        dataCounter = 0;
 
         Thread thread = new Thread() {
             @Override

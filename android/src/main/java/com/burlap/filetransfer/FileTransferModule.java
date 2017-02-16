@@ -134,10 +134,23 @@ public class FileTransferModule extends ReactContextBaseJavaModule {
         ReadableMapKeySetIterator dataIterator = data.keySetIterator();
         while (dataIterator.hasNextKey()) {
             String key = dataIterator.nextKey();
-            String value = data.getString(key);
             ReadableType type = data.getType(key);
-            bodyBuilder.addFormDataPart(key, value);
+            String value;
+            switch(type) {
+                case Null:
+                    value = "null";
+                    break;
+                case Boolean:
+                    value = String.valueOf(data.getBoolean(key));
+                    break;
+                case Number:
+                    value = String.valueOf(data.getDouble(key));
+                    break;
+                default:
+                    value = data.getString(key);
+            }
             Log.d(TAG, "key=" + key + ", type=" + type + ", value=" + value);
+            bodyBuilder.addFormDataPart(key, value);
         }
 
         return bodyBuilder.build();

@@ -146,6 +146,12 @@ public class FileTransferModule extends ReactContextBaseJavaModule {
                 case Number:
                     value = String.valueOf(data.getDouble(key));
                     break;
+                case Array:
+                    value = String.valueOf(data.getArray(key));
+                    break;
+                case Map:
+                    value = String.valueOf(data.getMap(key));
+                    break;
                 default:
                     value = data.getString(key);
             }
